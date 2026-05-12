@@ -19,86 +19,17 @@ sb: Client = get_sb()
 # ── Custom CSS ────────────────────────────────────────────
 st.markdown('''
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
-
-    * { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif !important; }
-
-    .stApp {
-        background: linear-gradient(175deg, #fff5f5 0%, #fef0f3 30%, #f5eeff 70%, #fef5f5 100%);
-        background-attachment: fixed;
+    .stApp { background: linear-gradient(170deg, #fef5f5 0%, #fce4ec 35%, #f3e5f5 100%); }
+    .block-container { padding: 2rem 1rem 1.5rem 1rem !important; }
+    .stButton button {
+        border-radius: 12px !important; font-weight: 550 !important;
+        border: none !important; background: #fdf0ed !important;
+        padding: 5px 0 !important; font-size: 13px !important;
+        letter-spacing: 0.5px !important; transition: all 0.15s ease !important;
+        width: 100% !important; color: #c0978e !important;
     }
-    .block-container {
-        padding: 2.2rem 0.9rem 1.8rem 0.9rem !important;
-        max-width: 500px !important;
-        margin: 0 auto;
-    }
-
-    /* 主操作按钮 */
-    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] .stButton > button {
-        border-radius: 14px !important;
-        font-weight: 600 !important;
-        border: none !important;
-        padding: 10px 0 !important;
-        font-size: 14px !important;
-        letter-spacing: 1px !important;
-        transition: all 0.2s ease !important;
-        width: 100% !important;
-        background: #f8e8e5 !important;
-        color: #b88070 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
-    }
-    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] .stButton > button:hover {
-        background: #f3d8d3 !important; color: #a06a5a !important;
-        transform: translateY(-1px);
-        box-shadow: 0 3px 12px rgba(180,120,100,0.12) !important;
-    }
-    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] .stButton > button:active {
-        transform: scale(0.97) !important;
-    }
-
-    /* 内联小按钮（记录/查看） */
-    div[data-testid="column"] .stButton > button {
-        border-radius: 10px !important;
-        font-weight: 550 !important;
-        border: 1px solid #f0e0da !important;
-        background: #fefaf9 !important;
-        padding: 6px 0 !important;
-        font-size: 12px !important;
-        letter-spacing: 0.3px !important;
-        transition: all 0.15s ease !important;
-        width: 100% !important;
-        color: #c9a098 !important;
-        box-shadow: none !important;
-    }
-    div[data-testid="column"] .stButton > button:hover {
-        background: #fcf0ec !important; border-color: #e8c8c0 !important; color: #b08070 !important;
-    }
-
-    /* 标题 */
-    h2 { font-weight: 700 !important; color: #5a4a44 !important; letter-spacing: 0.5px !important; }
-    h3 { font-weight: 650 !important; color: #5a4a44 !important; }
-
-    /* 输入框 */
-    input[type="text"], input[type="number"], input[type="password"], input[type="date"] {
-        border-radius: 12px !important;
-        border: 1.5px solid #f0e0da !important;
-        background: #fefaf9 !important;
-        padding: 10px 14px !important;
-        font-size: 14px !important;
-        color: #5a4a44 !important;
-        transition: all 0.2s ease !important;
-    }
-    input:focus {
-        border-color: #e0b8b0 !important;
-        box-shadow: 0 0 0 3px rgba(220,160,140,0.1) !important;
-        background: #fff !important;
-    }
-
-    /* 信息条 */
-    .stAlert { border-radius: 14px !important; border: none !important; }
-
-    /* 分割线 */
-    hr { border-color: #f5e8e4 !important; margin: 1.2rem 0 !important; }
+    .stButton button:hover { background: #f9e2dc !important; color: #b07e74 !important; }
+    .stButton button:active { transform: scale(0.97) !important; }
 </style>
 ''', unsafe_allow_html=True)
 
@@ -134,12 +65,8 @@ if 'page' not in st.session_state:
 
 # ── HOME ──────────────────────────────────────────────────
 if st.session_state.page == 'home':
-    st.markdown('''
-    <div style="text-align:center;margin-bottom:20px">
-        <div style="font-size:38px;margin-bottom:4px">🏆</div>
-        <h2 style="margin:0 0 4px 0">减肥挑战赛</h2>
-        <p style="color:#b0a0a0;margin:0;font-size:13px">记录每日体重，一起变瘦</p>
-    </div>''', unsafe_allow_html=True)
+    st.markdown('<h2 style="text-align:center">🏆 减肥挑战赛</h2>', unsafe_allow_html=True)
+    st.markdown('<p style="text-align:center;color:#b0a0a0">记录每日体重，一起变瘦</p>', unsafe_allow_html=True)
 
     rankings = get_rankings()
 
@@ -154,11 +81,11 @@ if st.session_state.page == 'home':
         col_left, col_rec, col_view = st.columns([0.6, 0.2, 0.2], gap='small')
         with col_left:
             st.markdown(f'''
-            <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:42px;height:42px;border-radius:50%;background:{r["color"]};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:18px;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,0.06)">{r["name"][0]}</div>
+            <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:40px;height:40px;border-radius:50%;background:{r["color"]};display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:17px;flex-shrink:0">{r["name"][0]}</div>
                 <div style="min-width:0">
-                    <div style="font-weight:650;font-size:15px;color:#4a3a36;line-height:1.3;margin-bottom:1px">{r["name"]}</div>
-                    <div style="font-size:11px;color:#b0a0a0;line-height:1.3">初始{r["initial"]}kg · {latest_str} <span style="color:{lc};font-weight:550">{arrow}{abs(r["loss_pct"]):.1f}%</span></div>
+                    <div style="font-weight:650;font-size:14px;color:#3a3a3a;line-height:1.3">{r["name"]}</div>
+                    <div style="font-size:11px;color:#b0a0a0;line-height:1.3">初始{r["initial"]}kg · {latest_str} <span style="color:{lc}">{arrow}{abs(r["loss_pct"]):.1f}%</span></div>
                 </div>
             </div>''', unsafe_allow_html=True)
         with col_rec:
@@ -172,13 +99,13 @@ if st.session_state.page == 'home':
                 st.session_state.view_color = r['color']; st.session_state.view_initial = r['initial']
                 st.session_state.page = 'view'; st.rerun()
 
-    st.markdown('<div style="margin-top:8px"></div>', unsafe_allow_html=True)
+    st.markdown('---')
     c1, c2 = st.columns(2)
     with c1:
-        if st.button('📊 排行榜', use_container_width=True, key='btn_lb'):
+        if st.button('📊 排行榜', use_container_width=True):
             st.session_state.page = 'leaderboard'; st.rerun()
     with c2:
-        if st.button('⚙️ 管理', use_container_width=True, key='btn_admin'):
+        if st.button('⚙️ 管理', use_container_width=True):
             st.session_state.page = 'admin'; st.session_state.admin_verified = False; st.rerun()
 
 # ── RECORD ────────────────────────────────────────────────
