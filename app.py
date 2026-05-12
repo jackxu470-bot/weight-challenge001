@@ -270,7 +270,7 @@ elif st.session_state.page == 'admin':
         st.markdown('---')
         st.markdown('##### 💰 奖金池设置')
         prize = get_prize()
-        new_prize = st.number_input('总奖金 (元)', value=prize, step=100.0, key='pp')
+        new_prize = st.number_input('总奖金 (元)', value=float(prize), step=100.0, key='pp')
         if st.button('保存设置'):
             set_prize(new_prize)
             st.success('奖金池已更新')
